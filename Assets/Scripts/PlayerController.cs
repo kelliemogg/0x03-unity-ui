@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,6 +37,19 @@ public class PlayerController : MonoBehaviour
         {
             health -= 1;
             Debug.Log("Health: " + health);
+        }
+        if (other.gameObject.tag == "Goal")
+        {
+            Debug.Log("You win!");
+        }
+    }
+    void Update()
+    {
+        if (health == 0)
+        {
+            Debug.Log("Game Over!");
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
         }
     }
 }
