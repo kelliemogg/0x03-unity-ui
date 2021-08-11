@@ -1,24 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f;
-    public GameObject Player;
-    public Vector3 offset; 
+    private int score = 0;
+    public float speed = .1f;
+    private Rigidbody rb;
 
-    // Start is called before the first frame update
+    /// gets rb (rigidbody) for GameObject
     void Start()
-    {   
-    }
-
-    // Update is called once per frame
-    void Update()
     {
-        if (Player)
+        rb = GetComponent<Rigidbody>();
+    }
+    void FixedUpdate()
+    {
+        // GetAxis detects the user input (WASD or arrows)
+        // It then assigns the numbers based on that input
+        float xDirection = Input.GetAxis("Horizontal");
+        float zDirection = Input.GetAxis("Vertical");
+
+        // Vector3 is a variable that takes in 3 inputs (x, y, z)
+        Vector3 moveDirection = new Vector3(xDirection, 0.0f, zDirection);
+
+        rb.AddForce(moveDirection * speed);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Pickup")
         {
-            transform.position = player.transform.position + offset;
+            score += 1;
+            Debug.Log("Score: " + score);
+            Destroy(other.gameObject);
         }
     }
 }
