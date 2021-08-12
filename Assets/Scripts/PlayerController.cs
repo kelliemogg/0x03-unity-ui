@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = .1f;
     private Rigidbody rb;
     public Text scoreText;
+    public Text healthText;
 
     /// gets rb (rigidbody) for GameObject
     void Start()
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Trap")
         {
             health -= 1;
-            Debug.Log("Health: " + health);
+            /// Debug.Log("Health: " + health);
         }
         if (other.gameObject.tag == "Goal")
         {
@@ -57,5 +58,9 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score: " + score;
+    }
+    void SetHealthText()
+    {
+        healthText.text = "Health: " + health;
     }
 }
