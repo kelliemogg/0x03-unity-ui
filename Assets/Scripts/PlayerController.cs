@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private int score = 0;
     public float speed = .1f;
     private Rigidbody rb;
+    public Text scoreText;
 
     /// gets rb (rigidbody) for GameObject
     void Start()
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Pickup")
         {
             score += 1;
-            Debug.Log("Score: " + score);
+            /// Debug.Log("Score: " + score);
             Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "Trap")
@@ -51,5 +53,9 @@ public class PlayerController : MonoBehaviour
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         }
+    }
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score;
     }
 }
