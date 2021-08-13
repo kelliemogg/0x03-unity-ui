@@ -6980,8 +6980,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   speed: 500
+  rb: {fileID: 1840855360}
   scoreText: {fileID: 2029742187}
-  healthText: {fileID: 0}
+  healthText: {fileID: 44841223}
+  WinLoseText: {fileID: 447214293}
+  WinLoseBG: {fileID: 901387985}
+  readyplay: {fileID: 901387983}
 --- !u!1001 &1850270531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7623,7 +7627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -319.9942, y: -160.78232}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2029742187

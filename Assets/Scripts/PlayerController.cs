@@ -1,15 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
     public int health = 5;
     private int score = 0;
     public float speed = .1f;
-    private Rigidbody rb;
+    public Rigidbody rb;
     public Text scoreText;
     public Text healthText;
+    public Text WinLoseText;
+    public Image WinLoseBG;
+    public GameObject readyplay;
 
     /// gets rb (rigidbody) for GameObject
     void Start()
@@ -33,26 +38,37 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Pickup")
         {
             score += 1;
-            /// Debug.Log("Score: " + score);
+            SetScoreText();
             Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "Trap")
         {
             health -= 1;
+            SetHealthText();
             /// Debug.Log("Health: " + health);
         }
         if (other.gameObject.tag == "Goal")
         {
-            Debug.Log("You win!");
+            WinLoseText.text = "You Win!";
+            WinLoseText.color = Color.black;
+            WinLoseBG.color = Color.green;
+            /// Debug.Log("You win!");
         }
     }
     void Update()
     {
         if (health == 0)
         {
-            Debug.Log("Game Over!");
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            /// Debug.Log("Game Over!");
+            readyplay.SetActive(true);
+            WinLoseText.text = "Game Over!";
+            WinLoseText.color = Color.white;
+            WinLoseBG.color = Color.red;
+            StartCoroutine(LoadScene(3));
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
         }
     }
     void SetScoreText()
@@ -62,5 +78,11 @@ public class PlayerController : MonoBehaviour
     void SetHealthText()
     {
         healthText.text = "Health: " + health;
+    }
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(3);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
