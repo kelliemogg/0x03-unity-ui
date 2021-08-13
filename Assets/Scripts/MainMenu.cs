@@ -19,6 +19,11 @@ public class MainMenu : MonoBehaviour
             trapMat.color = colorblindMat;
             goalMat.color = Color.blue;
         }
+        else
+        {
+            trapMat.color = Color.red;
+            goalMat.color = Color.green;
+        }
         SceneManager.LoadScene("maze");
     }
     // Quit Maze
